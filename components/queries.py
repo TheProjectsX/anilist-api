@@ -2,3 +2,13 @@ ANIME_BY_ID = """query media($id:Int,$type:MediaType,$isAdult:Boolean){Media(id:
 
 
 CHARACTERS_BY_ANIME_ID = """query media($id:Int,$page:Int,$perPage:Int,$type:MediaType,$isAdult:Boolean){Media(id:$id,type:$type,isAdult:$isAdult){id characters(page:$page,perPage:$perPage,sort:[ROLE,RELEVANCE,ID]){pageInfo{total perPage currentPage lastPage hasNextPage}edges{id role name voiceActorRoles(sort:[RELEVANCE,ID]){roleNotes dubGroup voiceActor{id name{userPreferred}language:languageV2 image{large}}}node{id name{userPreferred}image{large}}}}}}"""
+
+
+STAFFS_BY_ANIME_ID = """query media($id:Int,$page:Int,$perPage:Int,$type:MediaType,$isAdult:Boolean){Media(id:$id,type:$type,isAdult:$isAdult){id staff(page:$page,perPage:$perPage,sort:[RELEVANCE,ID]){pageInfo{total perPage currentPage lastPage hasNextPage}edges{id role node{id name{userPreferred}image{large}}}}}}"""
+
+
+REVIEWS_BY_ANIME_ID = """query media($id:Int,$page:Int,$perPage:Int,$type:MediaType,$isAdult:Boolean){Media(id:$id,type:$type,isAdult:$isAdult){id title{userPreferred}reviews(page:$page,perPage:$perPage,sort:[RATING_DESC,ID]){pageInfo{total perPage currentPage lastPage hasNextPage}nodes{id summary rating ratingAmount user{id name avatar{large}}}}}}"""
+
+STATS_BY_ANIME_ID = """query ($id:Int,$type:MediaType,$isAdult:Boolean){Media(id:$id,type:$type,isAdult:$isAdult){id rankings{id rank type format year season allTime context}trends(sort:ID_DESC){nodes{averageScore date trending popularity}}airingTrends:trends(releasing:true,sort:EPISODE_DESC){nodes{averageScore inProgress episode}}distribution:stats{status:statusDistribution{status amount}score:scoreDistribution{score amount}}}}"""
+
+SOCIAL_BY_ANIME_ID = """query ($id:Int,$page:Int,$perPage:Int){Page(page:$page,perPage:$perPage){pageInfo{total perPage currentPage lastPage hasNextPage}activities(mediaId:$id,,sort:ID_DESC,type:MEDIA_LIST){... on ListActivity{id userId type status progress replyCount isLocked isSubscribed isLiked likeCount createdAt user{id name avatar{large}}media{id type bannerImage title{userPreferred}coverImage{large}}}}}}"""

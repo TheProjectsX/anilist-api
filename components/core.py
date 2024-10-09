@@ -42,10 +42,10 @@ def execute_query(query, variables={}) -> dict:
     response, error = None, None
     try:
         response = requests.post(ANILIST_BASE_URL, json=json_data)
-    except Exception as e:
+    except requests.exceptions.RequestException as e:
         error = e
 
-    if not response:
+    if response == None:
         return {
             "success": False,
             "message": "Internal Error occurred",
