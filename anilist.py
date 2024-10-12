@@ -353,5 +353,30 @@ def getMangaSocialById(id: Union[int, str], page=1, limit=25, parse_all=False) -
     return result
 
 
+# Custom Request from User
+def sendCustomRequestByQuery(query, variables):
+    """
+    Users can use custom query and variables to send any custom request
+
+    `query`: parameter holds the query. User can Use built in queries from <package-name>.queries
+    `variables`: variables data based on the query
+    """
+
+    result = core.execute_query(query=query, variables=variables)
+
+    return result
+
+
+# Get custom data of Anime via Id
+def getCustomAnimeDataById(dataKey, id):
+    """
+    upcoming
+    """
+    pass
+
+
+# Get Character Info By ID
+
+
 if __name__ == "__main__":
-    print(json.dumps(getFilteredManga(filters={"search": "Too many loosing"})))
+    print(json.dumps(getAnimeById("163134")))
