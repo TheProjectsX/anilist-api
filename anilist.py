@@ -55,6 +55,14 @@ def getFilteredAnime(
     return result
 
 
+# Search anime by name
+def searchAnime(query, page=1, limit=25):
+    variables = {"search": query, "type": "ANIME", "page": page, "perPage": limit}
+
+    result = core.execute_query(query=queries.SEARCH_QUERY, variables=variables)
+    return result
+
+
 # Get Anime details by ID
 def getAnimeById(id: Union[int, str]) -> dict:
     """
@@ -365,14 +373,6 @@ def sendCustomRequestByQuery(query, variables):
     result = core.execute_query(query=query, variables=variables)
 
     return result
-
-
-# Get custom data of Anime via Id
-def getCustomAnimeDataById(dataKey, id):
-    """
-    upcoming
-    """
-    pass
 
 
 # Get Character Info By ID
